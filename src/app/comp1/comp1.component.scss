@@ -6,9 +6,47 @@ form{
 
     button{
         margin-top: 10px;
+        background-color: rgb(237, 147, 36);
+        border-radius: 6px;
+        height: 35px;
+        border:none;
+        box-shadow:  2px 3px 3px rgb(183, 172, 172);
     }
 
     input{
         margin-left: 10px;
+        height: 20px;
+        border-radius: 6px;
+        border: 1px solid gray
+
+    }
+
+    select{
+        height: 25px;
+        border-radius: 6px;
+        border: 1px solid gray;
+        min-width: 150px;
+        margin-left: 5px;
+    }
+
+    label{
+        font-size: 15px;
+        color: rgb(50, 50, 64);
+        padding-left: 8px;
+    }
+.item{
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+    .submit-btn{
+        background-color: red;
+        border-radius: 6px;
+        height: 35px;
+        border:none;
+        box-shadow:  2px 3px 3px rgb(183, 172, 172);
+    }
+    .submit-btn:hover{
+        background-color: rgb(113, 34, 152);
     }
 }

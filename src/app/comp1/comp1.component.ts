@@ -14,7 +14,9 @@ export class Comp1Component implements OnInit {
 
   public years:any=[];
   public selectCountry:any=['India','USA','UK','China','Russia','Other']
-
+   public states = [ "Andhra Pradesh",   "Arunachal Pradesh",  "Assam", "Bihar",
+  "Chhattisgarh",   "Goa",   "Gujarat",   "Haryana",   "Himachal Pradesh",
+  "Jammu and Kashmir",   "Jharkhand",   "Karnataka",   "Kerala",]
 
   constructor(private formBuilder:FormBuilder) { }
 
@@ -42,35 +44,39 @@ this.getStudentForm();
           new FormControl(null,[Validators.required])
         ]),
 
-        // mail:this.formBuilder.group({
-        //    email:['',[Validators.required,Validators.email]]
-        // }),
-
         mail:this.formBuilder.array([
-          new FormControl(null,[Validators.required])
+          new FormControl(null,[Validators.required,Validators.email])
         ]),
 
+   
+        school:this.formBuilder.array([
+          this.addSchoolFormGroup()
+        ])
+        
+   
 
-        school:this.formBuilder.group({
-           
-          schoolName:['',[Validators.required]],
-          address:['',[Validators.required]],
-          nationality:['',[Validators.required]],
-          state:['',[Validators.required]],
-          from:['',[Validators.required]],
-          to:['',[Validators.required]],
-          
-        })
-    
       })
   }
 
 
-  onSubmit(){
-    console.log('student form', this.studentForm.value);
+  addSchoolFormGroup():FormGroup{
+   return this.formBuilder.group({
+           
+      schoolName:['',[Validators.required]],
+      address:['',[Validators.required]],
+      nationality:['',[Validators.required]],
+      state:['',[Validators.required]],
+      from:['',[Validators.required]],
+      to:['',[Validators.required]],
+      
+    })
   }
 
+  addSchoolBtn(){
+    (<FormArray>this.studentForm.get('school')).push(this.addSchoolFormGroup());
+  }
 
+ 
 addPhoneNumber(){
 
   const control = new FormControl(null,[Validators.required]);
@@ -81,13 +87,24 @@ get  phoneControls(){
   return (<FormArray>this.studentForm.get('phone')).controls;
 }
 
-get emailControls(){
-  return (<FormArray>this.studentForm.get('mail')).controls;
-}
+
 
 addMail(){
   const emailControl = new FormControl(null,[Validators.required]);
   (<FormArray>this.studentForm.get('mail')).push( emailControl);
+}
+
+get emailControls(){
+  return (<FormArray>this.studentForm.get('mail')).controls;
+}
+
+get schoolControls(){
+  return (<FormArray>this.studentForm.get('school')).controls
+}
+
+onSubmit(){
+  console.log('student form', this.studentForm.value);
+
 }
 
 }
