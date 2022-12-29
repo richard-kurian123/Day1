@@ -1,0 +1,103 @@
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+  <h1>New Member Registration</h1>
+  <div class="colums">
+
+    <div class="item">
+      <label for="fname"> First Name<span>*</span></label>
+      <input formControlName="firstName" id="fname" type="text" />
+    </div>
+
+    <div class="item">
+      <label for="lname"> Last Name<span>*</span></label>
+      <input formControlName="lastName" id="lname" type="text" name="lname" />
+    </div>
+
+    <div formArrayName="mail">
+      <ng-container *ngFor="let item  of emailControls; index as i ">
+        <div class="item">
+          <label for="eaddress">Email Address<span>*</span></label>
+          <input [formControlName]="i" id="" type="text" name="eaddress" />
+        </div>
+      </ng-container>
+      <button (click)="addMail()">add email</button>
+    </div>
+
+
+    <div formArrayName="phone">
+      <ng-container *ngFor="let item  of phoneControls; index as i ">
+
+        <div class="item">
+          <label for="phone">Phone<span>*</span></label>
+          <input [formControlName]="i" type="tel" />
+        </div>
+      </ng-container>
+      <button (click)="addPhoneNumber()">add phone </button>
+    </div>
+    <!-- form array for mobile ends here -->
+
+
+
+    <!-- school section starts here -->
+
+    <div formGroupName="school">
+
+      <div class="item">
+        <label for="address1">School Name<span>*</span></label>
+        <input formControlName="schoolName" id="address1" type="text" name="address1" />
+
+      </div>
+
+
+
+
+      <div class="item">
+        <label for="address2">Address <span>*</span></label>
+        <input formControlName="address" type="text" placeholder="" name="address2" />
+      </div>
+
+      <div class="item">
+        <label>Nationality <span>*</span></label>
+        <select formControlName="nationality">
+          <option>Select</option>
+          <option *ngFor="let country of  selectCountry">{{country}}</option>
+        </select>
+
+      </div>
+
+      <div class="item">
+        <label for="state">State<span>*</span></label>
+        <input type="text" formControlName="state">
+      </div>
+
+
+      <div class="item">
+        <label>From <span>*</span></label>
+        <select formControlName="from">
+          <option>Select</option>
+          <option *ngFor="let year of years">{{year}}</option>
+        </select>
+
+      </div>
+
+      <div class="item">
+        <label>TO <span>*</span></label>
+        <select formControlName="to">
+          <option>Select</option>
+          <option *ngFor="let year of years">{{year}}</option>
+        </select>
+      </div>
+
+      <button>add School</button>
+
+    </div>
+    <!-- closing school form group -->
+
+  </div>
+
+  <label>Click to submit the student form</label>
+  <div class="btn-block">
+
+    <input class="submit-btn" type="submit" [disabled]="!studentForm">
+  </div>
+
+</form>
